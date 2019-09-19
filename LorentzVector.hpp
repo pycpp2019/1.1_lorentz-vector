@@ -1,5 +1,4 @@
-#ifndef _LORENTZ_VECTOR_
-#define _LORENTZ_VECTOR_
+#pragma once
 
 class LorentzVector {
 private:
@@ -26,14 +25,14 @@ public:
 //##########___OUTPUTTING_METHOD___####################################################################################################
 	void print() const;
 //##########___OPERATIONS___###########################################################################################################
-	LorentzVector add(const LorentzVector & other_vector) const;
-	LorentzVector sub(const LorentzVector & other_vector) const;
-	LorentzVector mul(double Lambda) const;
 	double dot(const LorentzVector & other_vector) const;
 	double norm() const;
 //##########___CONVERSION_METHOD___####################################################################################################	
 	void zboost(double beta);		//If |beta| > 1, this function do nothing
-	
+//##########___OPERATORS___############################################################################################################
+	void operator+= (const LorentzVector& other_vector);
+	void operator-= (const LorentzVector& other_vector);
+	void operator*= (const double lambda);
+	LorentzVector operator+ (const LorentzVector& other_vector);
+	LorentzVector operator- (const LorentzVector& other_vector);
 };
-
-#endif
