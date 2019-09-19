@@ -1,4 +1,5 @@
 #pragma once
+#include <ostream>
 
 class LorentzVector {
 private:
@@ -18,12 +19,10 @@ public:
 	double get_y() const;
 	double get_z() const;
 //##########___SETTERS___##############################################################################################################
-	double set_t(double new_t);
-	double set_x(double new_x);
-	double set_y(double new_y);
-	double set_z(double new_z);
-//##########___OUTPUTTING_METHOD___####################################################################################################
-	void print() const;
+	void set_t(double new_t);
+	void set_x(double new_x);
+	void set_y(double new_y);
+	void set_z(double new_z);
 //##########___OPERATIONS___###########################################################################################################
 	double dot(const LorentzVector & other_vector) const;
 	double norm() const;
@@ -33,6 +32,10 @@ public:
 	void operator+= (const LorentzVector& other_vector);
 	void operator-= (const LorentzVector& other_vector);
 	void operator*= (const double lambda);
-	LorentzVector operator+ (const LorentzVector& other_vector);
-	LorentzVector operator- (const LorentzVector& other_vector);
+	LorentzVector operator+ (const LorentzVector& other_vector) const;
+	LorentzVector operator- (const LorentzVector& other_vector) const;
+	LorentzVector operator* (const double lambda) const;
+
+	friend LorentzVector operator* (const double lambda, const LorentzVector& l_vector);
+	friend std::ostream& operator<< (std::ostream& std_out_stream, const LorentzVector& l_vector);
 };

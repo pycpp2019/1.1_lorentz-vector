@@ -1,9 +1,9 @@
 #include "LorentzVector.hpp"
-#include <iostream>
+#include <ostream>
 #include <cmath>
 
 
-#define LIGHT_VEL 299 792 458
+#define LIGHT_VEL 299792458
 
 
 //##########___CONSTRUCTORS___#########################################################################################################
@@ -66,44 +66,13 @@ void LorentzVector::set_z(double new_z) {
 }
 
 
-//##########___OUTPUTTING_METHOD___####################################################################################################
-
-
-void LorentzVector::print() const {
-	std::cout << '(' << LIGHT_VEL * this->t << ';' << this->x <<\
-		';' << this->y << ';' << this->z << ')' << std::endl;
-	return;
-}
-
-
 //##########___OPERATIONS___###########################################################################################################
 
 
-LorentzVector LorentzVector::add(const LorentzVector & other_vector) const {
-	return LorentzVector(this->t + other_vector.get_t(),\
-		this->x + other_vector.get_x,\
-		this->y + other_vector.get_y,\
-		this->z + other_vector.get_z);
-}
-
-LorentzVector LorentzVector::sub(const LorentzVector & other_vector) const {
-	return LorentzVector(this->t - other_vector.get_t(),\
-		this->x - other_vector.get_x,\
-		this->y - other_vector.get_y,\
-		this->z - other_vector.get_z);
-}
-
-LorentzVector LorentzVector::mul(double lambda) const {
-	return LorentzVector(lambda * this->t,\
-		lambda * this->x,\
-		lambda * this->y,\
-		lambda * this->z);
-}
-
 double LorentzVector::dot(const LorentzVector & other_vector) const {
-	return (LIGHT_VEL * this->t  * LIGHT_VEL * other_vector.t -\
-		this->x * other_vector.x - this->y * other_vector.y -\
-		this->z * other_vector.z);
+	return (LIGHT_VEL * this->t  * LIGHT_VEL * other_vector.get_t() -\
+		this->x * other_vector.get_x() - this->y * other_vector.get_y() -\
+		this->z * other_vector.get_z());
 }
 
 double LorentzVector::norm() const {
@@ -126,4 +95,64 @@ void LorentzVector::zboost(double beta) {									//If |beta| > 1, this function
 	this->z = gamma_factor * (tmp_z - beta * LIGHT_VEL * tmp_t);
 	this->t = gamma_factor * (tmp_t - beta * tmp_z / LIGHT_VEL);
 	return;
+}
+
+
+//##########___OPERATORS___############################################################################################################
+
+
+void LorentzVector::operator+= (const LorentzVector& other_vector) {
+	this->t += other_vector.get_t();
+	this->x += other_vector.get_x();
+	this->y += other_vector.get_y();
+	this->z += other_vector.get_z();
+	return;
+}
+
+void LorentzVector::operator-= (const LorentzVector& other_vector) {
+	this->t -= other_vector.get_t();
+	this->x -= other_vector.get_x();
+	this->y -= other_vector.get_y();
+	this->z -= other_vector.get_z();
+	return;
+}
+
+void LorentzVector::operator*= (const double lambda) {
+	this->t *= lambda;
+	this->x *= lambda;
+	this->y *= lambda;
+	this->z *= lambda;
+	return;
+}
+
+LorentzVector LorentzVector::operator+ (const LorentzVector& other_vector) const {
+	return LorentzVector(this->t + other_vector.get_t(),\
+		this->x + other_vector.get_x(),\
+		this->y + other_vector.get_y(),\
+		this->z + other_vector.get_z());
+}
+
+LorentzVector LorentzVector::operator- (const LorentzVector& other_vector) const {
+	return LorentzVector(this->t - other_vector.get_t(),\
+		this->x - other_vector.get_x(),\
+		this->y - other_vector.get_y(),\
+		this->z - other_vector.get_z());
+}
+
+LorentzVector LorentzVector::operator* (const double lambda) const {
+	return LorentzVector(this->t * lambda, this->x * lambda,\
+		this->y * lambda, this->z * lambda);
+}
+
+
+
+
+LorentzVector operator* (const double lambda, const LorentzVector& l_vector) {
+	return l_vector * lambda;
+}
+
+std::ostream& operator<< (std::ostream& out_stream, const LorentzVector& l_vector) {
+	out_stream << "(" << l_vector.get_t() << "," << l_vector.get_x() << "," <<\
+	l_vector.get_y() << "," << l_vector.get_z() << ")";
+	return out_stream;
 }
