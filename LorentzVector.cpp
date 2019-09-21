@@ -152,7 +152,7 @@ LorentzVector operator* (const double lambda, const LorentzVector& l_vector) {
 }
 
 std::ostream& operator<< (std::ostream& out_stream, const LorentzVector& l_vector) {
-	out_stream << "(" << l_vector.get_t() << "," << l_vector.get_x() << "," <<\
-	l_vector.get_y() << "," << l_vector.get_z() << ")";
+	out_stream << "(" << l_vector.get_t() * LIGHT_VEL << "," <<\
+	l_vector.get_x() << "," << l_vector.get_y() << "," << l_vector.get_z() << ")";
 	return out_stream;
 }
