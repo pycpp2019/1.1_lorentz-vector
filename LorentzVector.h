@@ -1,4 +1,9 @@
+#include <iostream>
+
+
 class LorentzVector {
+private:
+    double coord[4];
 public:
     LorentzVector();
     LorentzVector(double, double, double, double);
