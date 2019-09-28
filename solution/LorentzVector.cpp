@@ -9,59 +9,59 @@
 //##########___CONSTRUCTORS___#########################################################################################################
 
 
-LorentzVector::LorentzVector(): t(0), x(0), y(0), z(0) {
+LorentzVector::LorentzVector(): t_coord(0), x_coord(0), y_coord(0), z_coord(0) {
 
 }
 
 LorentzVector::LorentzVector(double input_t, double input_x, double input_y, double input_z) {
 
-	this->t = input_t;
-	this->x = input_x;
-	this->y = input_y;
-	this->z = input_z;
+	this->t_coord = input_t;
+	this->x_coord = input_x;
+	this->y_coord = input_y;
+	this->z_coord = input_z;
 }
 
 
 //##########___GETTERS___##############################################################################################################
 
 
-double LorentzVector::get_t() const {
-	return this->t;
+double LorentzVector::t() const {
+	return this->t_coord;
 }
 
-double LorentzVector::get_x() const {
-	return this->x;
+double LorentzVector::x() const {
+	return this->x_coord;
 }
 
-double LorentzVector::get_y() const {
-	return this->y;
+double LorentzVector::y() const {
+	return this->y_coord;
 }
 
-double LorentzVector::get_z() const {
-	return this->z;
+double LorentzVector::z() const {
+	return this->z_coord;
 }
 
 
 //##########___SETTERS___##############################################################################################################
 
 
-void LorentzVector::set_t(double new_t) {
-	this->t = new_t;
+void LorentzVector::t(double new_t) {
+	this->t_coord = new_t;
 	return;
 }
 
-void LorentzVector::set_x(double new_x) {
-	this->x = new_x;
+void LorentzVector::x(double new_x) {
+	this->x_coord = new_x;
 	return;
 }
 
-void LorentzVector::set_y(double new_y) {
-	this->y = new_y;
+void LorentzVector::y(double new_y) {
+	this->y_coord = new_y;
 	return;
 }
 
-void LorentzVector::set_z(double new_z) {
-	this->z = new_z;
+void LorentzVector::z(double new_z) {
+	this->z_coord = new_z;
 	return;
 }
 
@@ -70,9 +70,9 @@ void LorentzVector::set_z(double new_z) {
 
 
 double LorentzVector::dot(const LorentzVector & other_vector) const {
-	return (LIGHT_VEL * this->t  * LIGHT_VEL * other_vector.get_t() -\
-		this->x * other_vector.get_x() - this->y * other_vector.get_y() -\
-		this->z * other_vector.get_z());
+	return (this->t_coord  * other_vector.t() -\
+		this->x_coord * other_vector.x() - this->y_coord * other_vector.y() -\
+		this->z_coord * other_vector.z());
 }
 
 double LorentzVector::norm() const {
@@ -89,11 +89,11 @@ void LorentzVector::zboost(double beta) {									//If |beta| > 1, this function
 	}
 
 	double gamma_factor = 1 / sqrt(1 - beta * beta);
-	double tmp_t = this->t;
-	double tmp_z = this->z;
+	double tmp_t = this->t_coord;
+	double tmp_z = this->z_coord;
 	
-	this->z = gamma_factor * (tmp_z - beta * LIGHT_VEL * tmp_t);
-	this->t = gamma_factor * (tmp_t - beta * tmp_z / LIGHT_VEL);
+	this->z_coord = gamma_factor * (tmp_z - beta * tmp_t);
+	this->t_coord = gamma_factor * (tmp_t - beta * tmp_z);
 	return;
 }
 
@@ -102,46 +102,46 @@ void LorentzVector::zboost(double beta) {									//If |beta| > 1, this function
 
 
 void LorentzVector::operator+= (const LorentzVector& other_vector) {
-	this->t += other_vector.get_t();
-	this->x += other_vector.get_x();
-	this->y += other_vector.get_y();
-	this->z += other_vector.get_z();
+	this->t_coord += other_vector.t();
+	this->x_coord += other_vector.x();
+	this->y_coord += other_vector.y();
+	this->z_coord += other_vector.z();
 	return;
 }
 
 void LorentzVector::operator-= (const LorentzVector& other_vector) {
-	this->t -= other_vector.get_t();
-	this->x -= other_vector.get_x();
-	this->y -= other_vector.get_y();
-	this->z -= other_vector.get_z();
+	this->t_coord -= other_vector.t();
+	this->x_coord -= other_vector.x();
+	this->y_coord -= other_vector.y();
+	this->z_coord -= other_vector.z();
 	return;
 }
 
 void LorentzVector::operator*= (const double lambda) {
-	this->t *= lambda;
-	this->x *= lambda;
-	this->y *= lambda;
-	this->z *= lambda;
+	this->t_coord *= lambda;
+	this->x_coord *= lambda;
+	this->y_coord *= lambda;
+	this->z_coord *= lambda;
 	return;
 }
 
 LorentzVector LorentzVector::operator+ (const LorentzVector& other_vector) const {
-	return LorentzVector(this->t + other_vector.get_t(),\
-		this->x + other_vector.get_x(),\
-		this->y + other_vector.get_y(),\
-		this->z + other_vector.get_z());
+	return LorentzVector(this->t_coord + other_vector.t(),\
+		this->x_coord + other_vector.x(),\
+		this->y_coord + other_vector.y(),\
+		this->z_coord + other_vector.z());
 }
 
 LorentzVector LorentzVector::operator- (const LorentzVector& other_vector) const {
-	return LorentzVector(this->t - other_vector.get_t(),\
-		this->x - other_vector.get_x(),\
-		this->y - other_vector.get_y(),\
-		this->z - other_vector.get_z());
+	return LorentzVector(this->t_coord - other_vector.t(),\
+		this->x_coord - other_vector.x(),\
+		this->y_coord - other_vector.y(),\
+		this->z_coord - other_vector.z());
 }
 
 LorentzVector LorentzVector::operator* (const double lambda) const {
-	return LorentzVector(this->t * lambda, this->x * lambda,\
-		this->y * lambda, this->z * lambda);
+	return LorentzVector(this->t_coord * lambda, this->x_coord * lambda,\
+		this->y_coord * lambda, this->z_coord * lambda);
 }
 
 
@@ -152,7 +152,7 @@ LorentzVector operator* (const double lambda, const LorentzVector& l_vector) {
 }
 
 std::ostream& operator<< (std::ostream& out_stream, const LorentzVector& l_vector) {
-	out_stream << "(" << l_vector.get_t() * LIGHT_VEL << "," <<\
-	l_vector.get_x() << "," << l_vector.get_y() << "," << l_vector.get_z() << ")";
+	out_stream << "(" << l_vector.t() << "," <<\
+	l_vector.x() << "," << l_vector.y() << "," << l_vector.z() << ")";
 	return out_stream;
 }
