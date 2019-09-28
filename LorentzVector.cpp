@@ -1,9 +1,8 @@
-#include "LorentzVector.hpp"
+#include "LorentzVector.h"
 #include <ostream>
 #include <cmath>
 
 
-#define LIGHT_VEL 299792458
 
 
 //##########___CONSTRUCTORS___#########################################################################################################
