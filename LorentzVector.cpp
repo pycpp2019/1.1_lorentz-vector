@@ -75,7 +75,7 @@ double LorentzVector::dot(const LorentzVector & other_vector) const {
 }
 
 double LorentzVector::norm() const {
-	return this->dot(*this);
+	return sqrt(std::abs(this->dot(*this)));
 }
 
 
