@@ -1,6 +1,6 @@
 #include <utility>
 #include <cmath>
-
+#define M_PI 3.1415926535897932
 
 class Rng {
 private:
