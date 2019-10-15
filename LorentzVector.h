@@ -2,7 +2,6 @@
 #define LORENTZVECTOR_H
 class LorentzVector {
 	private:
-		int c=300000000;
 		double vt,vx,vy,vz;
 	public:
 		LorentzVector(); //default constructor
