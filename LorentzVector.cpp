@@ -55,7 +55,7 @@ LorentzVector operator * (const LorentzVector& lv, double a) {
     return LorentzVector(a * lv.t(), a * lv.x(), a * lv.y(), a * lv.z());
 }
 std::ostream& operator << (std::ostream& s, const LorentzVector& lv) {
-    cout << "(" << lv.t() << ", " << lv.x() << ", " << lv.y() << ", " << lv.z() << ")" << endl;
+    s << "(" << lv.t() << ", " << lv.x() << ", " << lv.y() << ", " << lv.z() << ")";
     return s;
 }
 void LorentzVector::zboost(double beta) {
