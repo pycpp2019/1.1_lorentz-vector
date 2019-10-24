@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include "LorentzVector.h"
-std::ostream& operator << (std::ostream&, const LorentzVector&);
+
 using namespace std;
  LorentzVector:: LorentzVector(){
         t(0);x(0); y(0);z(0);
@@ -46,10 +46,6 @@ return sqrt(fabs((p*p)-b*b-c*c-d*d));
     this -> d = x;
     }
 
-    void LorentzVector:: print() const {
-    cout << "LorentzVector is " << t() << ',' << x() <<','<< y() << ',' << z() << endl;
-    }
-
     void LorentzVector::operator+=(const LorentzVector& other){
     p+=other.t();
     b+=other.x();
@@ -87,14 +83,14 @@ return sqrt(fabs((p*p)-b*b-c*c-d*d));
         LorentzVector third(a*lv.p,a*lv.b,a*lv.c,a*lv.d);
         return third;
     }
-    std::ostream& operator << (std::ostream& out, const LorentzVector& lv){
-     out<<"{"<<lv.p<<","<<lv.b<<","<<lv.c<<","<<lv.d<<"}";
-        return out;
-    }
+
     double LorentzVector::dot(const LorentzVector& other) const{
     return p*other.t()-b*other.x()-c*other.y()-d*other.z();
     }
-
+    std::ostream& operator >> (std::ostream& out, const LorentzVector& lv){
+     out<<"{"<<lv.p<<","<<lv.b<<","<<lv.c<<","<<lv.d<<"}";
+        return out;
+    }
     void LorentzVector::zboost ( double beta ) {
     double Q = sqrt(1-beta*beta);
     double P = (p + beta*d)/Q;
@@ -106,6 +102,4 @@ return sqrt(fabs((p*p)-b*b-c*c-d*d));
     c = C;
     d = D;
     }
-    void LorentzVector::read(){
-    cin>>p>>b>>c>>d;
-    }
+
