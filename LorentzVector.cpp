@@ -100,7 +100,7 @@ return sqrt(fabs((p*p)-b*b-c*c-d*d));
     double P = (p + beta*d)/Q;
     double B = b;
     double C = c;
-    double D = (d + beta*d)/Q;
+    double D = (d + beta*p)/Q;
     p = P;
     b = B;
     c = C;
