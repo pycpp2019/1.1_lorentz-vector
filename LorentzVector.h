@@ -1,4 +1,5 @@
 class LorentzVector {
+double p,b,c,d;
 public:
     LorentzVector();
     LorentzVector(double, double, double, double);
