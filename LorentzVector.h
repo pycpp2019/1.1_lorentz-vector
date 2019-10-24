@@ -27,4 +27,4 @@ double p,b,c,d;
     double dot(const LorentzVector& other) const;
 };
 
-std::ostream& operator << (std::ostream&, const LorentzVector&);
+std::ostream& operator << (std::ostream& out, const LorentzVector& lv);
