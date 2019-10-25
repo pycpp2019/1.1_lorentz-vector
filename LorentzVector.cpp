@@ -87,7 +87,7 @@ return sqrt(fabs((p*p)-b*b-c*c-d*d));
     double LorentzVector::dot(const LorentzVector& other) const{
     return p*other.t()-b*other.x()-c*other.y()-d*other.z();
     }
-    std::ostream& operator >> (std::ostream& out, const LorentzVector& lv){
+    std::ostream& operator << (std::ostream& out, const LorentzVector& lv){
      out<<"{"<<lv.p<<","<<lv.b<<","<<lv.c<<","<<lv.d<<"}";
         return out;
     }
