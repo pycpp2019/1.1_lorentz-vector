@@ -93,5 +93,5 @@ void LorentzVector::zboost(double beta) {
     z_ = Z;
 }
 double LorentzVector::dot(const LorentzVector& b) const {
-    return t_*b.t_ + x_*b.x_ + y_*b.y_ + z_*b.z_;
+    return -t_*b.t_ + x_*b.x_ + y_*b.y_ + z_*b.z_;
 }
