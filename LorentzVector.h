@@ -1,5 +1,7 @@
 class LorentzVector {
+
 public:
+double p,b,c,d;
     LorentzVector();
     LorentzVector(double, double, double, double);
 
@@ -20,9 +22,9 @@ public:
     LorentzVector operator+(const LorentzVector& other) const;
     LorentzVector operator-(const LorentzVector& other) const;
     friend LorentzVector operator*(const LorentzVector& lv, double a);
-    friend std::ostream& operator << (std::ostream&, const LorentzVector&);
+    friend std::ostream& operator << (std::ostream& out, const LorentzVector& lv);
     void zboost(double beta);
     double dot(const LorentzVector& other) const;
 };
 
-std::ostream& operator << (std::ostream&, const LorentzVector&);
+std::ostream& operator << (std::ostream& out, const LorentzVector& lv);
