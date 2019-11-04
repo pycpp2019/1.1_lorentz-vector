@@ -26,6 +26,8 @@ public:
 
 	friend LorentzVector operator+(const LorentzVector&, const LorentzVector&);
 	friend LorentzVector operator-(const LorentzVector &, const LorentzVector &);
+	friend void operator+=(const LorentzVector&, const LorentzVector&);
+	friend void operator-=(const LorentzVector &, const LorentzVector &);
 	friend LorentzVector operator-(const LorentzVector &);
 	friend LorentzVector operator*(const LorentzVector &, double );
 	friend LorentzVector operator*(double , const LorentzVector &);
