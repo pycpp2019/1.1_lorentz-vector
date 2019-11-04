@@ -42,7 +42,7 @@ LorentzVector operator-(const LorentzVector &v1, const LorentzVector &v2)
 {
 	return LorentzVector(v1.t() - v2.t(), v1.x() - v2.x(), v1.y() - v2.y(), v1.z() - v2.z());
 }
-void operator+=(const LorentzVector &v1, const LorentzVector &v2) 
+void operator+=(LorentzVector &v1, const LorentzVector &v2) 
 {
 	v1.t(v1.t() + v2.t());
 	v1.x(v1.x() + v2.x());
@@ -50,7 +50,7 @@ void operator+=(const LorentzVector &v1, const LorentzVector &v2)
 	v1.z(v1.z() + v2.z());
 	//return LorentzVector(v1.t() + v2.t(), v1.x() + v2.x(), v1.y() + v2.y(), v1.z() + v2.z());
 }
-void operator-=(const LorentzVector &v1, const LorentzVector &v2) 
+void operator-=(LorentzVector &v1, const LorentzVector &v2) 
 {
 	v1.t(v1.t() - v2.t());
 	v1.x(v1.x() - v2.x());
