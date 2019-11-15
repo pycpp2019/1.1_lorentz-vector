@@ -1,6 +1,12 @@
 class LorentzVector {
+    double x1;
+    double y1;
+    double z1;
+    double t1;
 public:
     LorentzVector();
+
+
     LorentzVector(double, double, double, double);
 
     double t() const;
