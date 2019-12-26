@@ -1,105 +1,132 @@
-
-#include <iostream>
-#include <math.h>
+#include<iostream>
+#include <cmath>
 #include "LorentzVector.h"
 
 using namespace std;
- LorentzVector:: LorentzVector(){
-        t(0);x(0); y(0);z(0);
-        }
-
-LorentzVector::LorentzVector(double T, double X, double Y, double Z){
-        t(T); x(X); y(Y); z(Z);}
-
-double LorentzVector::t() const{
-return p;
+LorentzVector::LorentzVector(double a, double b, double c, double d)
+{
+  this->t1=a;
+  this->x1=b;
+  this->y1=c;
+  this->z1=d;
 }
 
-double LorentzVector::x() const{
-return b;
+LorentzVector::LorentzVector()
+{
+    this->x1=0; this->y1=0; this->z1=0; this->t1=0;
 }
 
-double LorentzVector::y() const{
-return c;
+double LorentzVector::t() const
+{
+    return this->t1;
 }
 
-double LorentzVector::z() const{
-return d;
+double LorentzVector::x() const
+{
+    return this->x1;
 }
 
-double LorentzVector::norm() const{
-return sqrt(fabs((p*p)-b*b-c*c-d*d));
-
+double LorentzVector::y() const
+{
+    return this->y1;
 }
-    void LorentzVector::t(double x){
-    this -> p = x;
-    }
 
-    void LorentzVector::x(double x){
-    this -> b = x;
+double LorentzVector::z() const
+{
+    return this->z1;
+}
+double LorentzVector::norm() const
+{
+    double a=(this->x1*this->x1+this->y1*this->y1+this->z1*this->z1-this->t1*this->t1);
+    if (a>=0)
+    {
+       return sqrt(a);
     }
+    else{ 
+        return(sqrt(-a));
+        };
+}
+void LorentzVector::t(double a)
+{
+    this->t1=a;
+}
 
-    void LorentzVector::y(double x){
-    this -> c = x;
-    }
+void LorentzVector::x(double a)
+{
+    this->x1=a;
+}
 
-    void LorentzVector::z(double x){
-    this -> d = x;
-    }
+void LorentzVector::y(double a)
+{
+    this->y1=a;
+}
 
-    void LorentzVector::operator+=(const LorentzVector& other){
-    p+=other.t();
-    b+=other.x();
-    c+=other.y();
-    d+=other.z();
-    }
+void LorentzVector::z(double a)
+{
+    this->z1=a;
+}
+double LorentzVector::dot(const LorentzVector& other) const
+{
+    double dot;
+    dot = this->x1*other.x()+this->y1*other.y()+this->z1*other.z()-this->t1*other.t();
+    return dot;
+}
 
-     void LorentzVector::operator-=(const LorentzVector& other){
-    p-=other.t();
-    b-=other.x();
-    c-=other.y();
-    d-=other.z();
-    }
-
-    void LorentzVector::operator*=(double a){
-    p*=a;
-    b*=a;
-    c*=a;
-    d*=a;
-    }
-
-    LorentzVector LorentzVector::operator+(const LorentzVector& other) const{
-    LorentzVector third(p,b,c,d);
-    third+=other;
-    return third;
-    }
-
-    LorentzVector LorentzVector::operator-(const LorentzVector& other) const{
-    LorentzVector third(p,b,c,d);
-    third-=other;
-    return third;
-    }
-
-    LorentzVector operator*(const LorentzVector& lv, double a){
-        LorentzVector third(a*lv.p,a*lv.b,a*lv.c,a*lv.d);
-        return third;
-    }
-
-    double LorentzVector::dot(const LorentzVector& other) const{
-    return p*other.t()-b*other.x()-c*other.y()-d*other.z();
-    }
-    std::ostream& operator << (std::ostream& out, const LorentzVector& lv){
-     out<<"{"<<lv.p<<","<<lv.b<<","<<lv.c<<","<<lv.d<<"}";
-        return out;
-    }
-    void LorentzVector::zboost ( double beta ) {
-    double Q = sqrt(1-beta*beta);
-    double P = (p + beta*d)/Q;
-    double B = b;
-    double C = c;
-    double D = (d + beta*p)/Q;
-    p = P;
-    b = B;
-    c = C;
-    d = D;
-    }
+void LorentzVector::zboost(double beta)
+{
+    double z2=(this->z1-beta*this->t1)/(sqrt(1-beta*beta));
+    this->t1=(this->t1-beta*this->z1)/(sqrt(1-beta*beta));
+    this->z1=z2;
+}
+void LorentzVector::operator+=(const LorentzVector& other)
+{
+    t(t()+other.t());
+    x(x()+other.x());
+    y(y()+other.y());
+    z(z()+other.z());
+}
+void LorentzVector::operator-=(const LorentzVector& other)
+{
+    t(t()-other.t());
+    x(x()-other.x());
+    y(y()-other.y());
+    z(z()-other.z());
+}
+void LorentzVector::operator*=(double a)
+{
+    t(t()*a);
+    x(x()*a);
+    y(y()*a);
+    z(z()*a);
+}
+LorentzVector LorentzVector::operator+(const LorentzVector& other) const
+{
+    LorentzVector v;
+    v.t(t()+other.t());
+    v.x(x()+other.x());
+    v.y(y()+other.y());
+    v.z(z()+other.z());
+    return v;
+}
+LorentzVector LorentzVector::operator-(const LorentzVector& other) const
+{
+    LorentzVector v;
+    v.t(t()-other.t());
+    v.x(x()-other.x());
+    v.y(y()-other.y());
+    v.z(z()-other.z());
+    return v;
+}
+LorentzVector operator*(const LorentzVector& lv, double a)
+{
+    LorentzVector v;
+    v.t(lv.t()*a);
+    v.x(lv.x()*a);
+    v.y(lv.y()*a);
+    v.z(lv.z()*a);
+    return v;
+}
+std::ostream& operator << (std::ostream& out, const LorentzVector& v)
+{
+    return out<<"{"<<v.t() << "," << v.x() << "," << v.y() << "," << v.z() << "}";
+}
